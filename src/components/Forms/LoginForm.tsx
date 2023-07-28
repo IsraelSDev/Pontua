@@ -9,6 +9,7 @@ import Button from '~/components/Button/Button';
 import React from 'react';
 import ForgotButton from '~/components/Button/ForgotButton';
 import './stylesForm.scss';
+import ButtonCustom from '~/components/Button/Button';
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -34,7 +35,6 @@ const LoginForm = () => {
             endAdornment={
               <InputAdornment position='end'>
                 <SvgIcon>
-                  {/* credit: plus icon from https://heroicons.com/ */}
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     width='17'
@@ -77,7 +77,7 @@ const LoginForm = () => {
         </FormControl>
         <div className={'row'}>
           <div className={'col-12'}>
-            <Button title={'entrar '} />
+            <ButtonCustom id={1} title={'entrar'} />
           </div>
         </div>
       </div>

@@ -12,12 +12,12 @@ import GridCustom from '~/components/Grid/Grid';
 import Circular from '~/components/Loading/Circular';
 
 import { getMarvelCharacters, getMarvelCharactersNavigate } from '~/services/marvelAPI';
-import { usePageContext } from "~/store/PageContext";
+import { usePageContext } from '~/store/PageContext';
 
 const HeroSelector = () => {
+  const { hero } = usePageContext();
 
-  const {hero} = usePageContext()
-
+  const [firstLoad, handleFirstLoad] = useState(true);
   const [page, setPage] = useState(1);
 
   const handlePagination = (index, page) => setPage(page);
@@ -27,12 +27,12 @@ const HeroSelector = () => {
 
   useEffect(() => {
     handleLoading(true);
+    handleFirstLoad(false);
     const fetchMarvelCharacters = async () => {
       try {
         const data = await getMarvelCharacters();
         setHeroList(data?.data?.results);
         setheroListInfo(data?.data);
-        console.log(heroListInfo);
         handleLoading(false);
       } catch (error) {
         console.log('Error: ' + error);
@@ -40,7 +40,7 @@ const HeroSelector = () => {
       }
     };
     fetchMarvelCharacters();
-  }, []);
+  }, [firstLoad]);
   useEffect(() => {
     handleLoading(true);
     const fetchMarvelCharacters = async () => {
@@ -48,7 +48,6 @@ const HeroSelector = () => {
         const data = await getMarvelCharactersNavigate(page);
         setHeroList(data?.data?.results);
         setheroListInfo(data?.data);
-        console.log(heroListInfo);
         handleLoading(false);
       } catch (error) {
         console.log('Error: ' + error);
