@@ -10,7 +10,7 @@ import ForgotButton from '~/components/Button/ForgotButton';
 import './stylesForm.scss';
 import ButtonCustom from '~/components/Button/Button';
 
-const LoginForm = () => {
+const CadForm = () => {
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -22,15 +22,15 @@ const LoginForm = () => {
     <form>
       <div>
         <h1>
-          Bem-vindo <span>.</span>
+          Registre-se <span>.</span>
         </h1>
-        <p>informe as suas credenciais de acesso ao portal</p>
+        <p>Crie um login e senha para aproveitar nosso app.</p>
       </div>
       <div>
         <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
           <OutlinedInput
             id='outlined-size-small'
-            placeholder='Informe seu e-mail'
+            placeholder='Registre seu e-mail'
             endAdornment={
               <InputAdornment position='end'>
                 <SvgIcon>
@@ -53,7 +53,7 @@ const LoginForm = () => {
         </FormControl>
         <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
           <OutlinedInput
-            placeholder='Informe sua senha'
+            placeholder='Registre sua senha'
             id='outlined-adornment-password'
             type={showPassword ? 'text' : 'password'}
             endAdornment={
@@ -81,11 +81,10 @@ const LoginForm = () => {
         </div>
       </div>
       <div className={'d-flex mt-2 justify-content-between'}>
-        <ForgotButton id={2} />
-        <ForgotButton />
+        <ForgotButton id={3} />
       </div>
     </form>
   );
 };
 
-export default LoginForm;
+export default CadForm;
