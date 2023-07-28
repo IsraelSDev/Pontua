@@ -1,0 +1,17 @@
+Select {
+  border-radius: 8px;
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+}
+
+em {
+  display: flex;
+  color: var(--gray-500);
+  font-family: 'Inter', sans serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
