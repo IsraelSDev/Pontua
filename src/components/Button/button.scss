@@ -4,8 +4,8 @@
   padding: 16px 107px;
   align-items: center;
   border-radius: 10px;
-  background: var(--blue-600, #081B4E);
-  color: var(--gray-150, #FBFBFB);
+  background: var(--blue-600, #081b4e);
+  color: var(--gray-150, #fbfbfb);
   font-family: Epilogue, sans serif;
   font-size: 24px;
   font-style: normal;
@@ -16,13 +16,12 @@
 
 .forgotButton {
   button {
-
     outline: 0;
     border: 0;
     background-color: transparent;
 
     span {
-      color: var(--orange-700, #F21A05);
+      color: var(--orange-700, #f21a05);
       text-align: right;
       font-family: Epilogue, sans serif;
       font-size: 12px;
@@ -30,12 +29,10 @@
       font-weight: 400;
       line-height: normal;
       letter-spacing: -0.715px;
-
     }
   }
 }
 
 .btn-large {
   padding: 16px 10px;
-
 }
