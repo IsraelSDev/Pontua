@@ -1,7 +1,4 @@
-import Hello from '~/components/Hello';
+import RoutesApp from '~/routes/RoutesApp';
 
-function App() {
-  return <Hello />;
-}
-
+const App = () => <RoutesApp />;
 export default App;

@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap');
+
+@import '@fontsource/roboto/300.css';
+@import '@fontsource/roboto/400.css';
+@import '@fontsource/roboto/500.css';
+@import '@fontsource/roboto/700.css';
+
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+
+:root {
+  --white: #FFFFFF;
+  --black: #000000;
+  --divider: #EBEFF2;
+  --blue-800: #00113D;
+  --blue-600: #213770;
+  --blue-200: #747D94;
+  --orange-500: #F21A05;
+  --orange-400: #F43724;
+  --bg-gray: #F5F6F8;
+  --gray-100: #EAECF0;
+  --gray-500: #777;
+
+  --font-inter: 'Inter', sans-serif;
+  --font-epilogue: 'Epilogue', sans-serif;
+
+
+}

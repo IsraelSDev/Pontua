@@ -13,8 +13,23 @@
     "format": "npm run prettier:fix && npm run lint:fix"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.5",
+    "@material-ui/lab": "^4.0.0-alpha.61",
+    "@mui/icons-material": "^5.14.1",
+    "@mui/material": "^5.14.2",
+    "@mui/styled-engine-sc": "^5.12.0",
+    "axios": "^1.4.0",
+    "bootstrap": "5.3.1",
+    "env-cmd": "^10.1.0",
+    "md5": "^2.3.0",
+    "node-sass": "^9.0.0",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "react-router-dom": "^6.14.2",
+    "sass": "^1.64.1",
+    "styled-components": "^6.0.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.9",
