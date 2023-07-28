@@ -8,7 +8,7 @@ import { usePageContext } from '~/store/PageContext';
 import { useEffect } from 'react';
 
 const Sidebar = () => {
-  let boolea = true;
+  const boolea = true;
   const { currentPage, handleCurrentPage } = usePageContext();
 
   return (

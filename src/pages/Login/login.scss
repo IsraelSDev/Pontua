@@ -3,23 +3,19 @@
   min-height: 100vh;
   height: 100%;
 
-
   img {
     margin-top: 49px;
   }
 
-
   .box-one {
-
   }
 
   .box-two {
-
   }
 
   .box-two {
     h1 {
-      color: var(--blue-600, #081B4E);
+      color: var(--blue-600, #081b4e);
       font-family: Epilogue, sans serif;
       font-size: 36px;
       font-style: normal;
@@ -28,7 +24,7 @@
       letter-spacing: -2.34px;
 
       span {
-        color: var(--orange-500, #F43724);
+        color: var(--orange-500, #f43724);
         font-family: Epilogue, sans serif;
         font-size: 36px;
         font-style: normal;
@@ -49,29 +45,26 @@
     }
 
     form {
-
       width: 380px;
       height: 433px;
       border-radius: 28px;
-      background: var(--white-0, #FFF);
+      background: var(--white-0, #fff);
       padding: 49px 33px;
     }
 
     .MuiFormControl-root {
-
       width: 308px;
       height: 59px;
       margin: 0 auto 23px auto;
     }
 
     .MuiSvgIcon-root {
-      color: #293D71;
+      color: #293d71;
     }
 
     input[type='text'],
-    input[type='password'],
-    {
-      color: var(--blue-500, #293D71);
+    input[type='password'] {
+      color: var(--blue-500, #293d71);
       font-family: Epilogue, sans serif;
       font-size: 16px;
       font-style: normal;
@@ -79,11 +72,5 @@
       line-height: normal;
       letter-spacing: -1.04px;
     }
-
-
   }
-
 }
-
-
-
