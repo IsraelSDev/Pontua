@@ -1,12 +1,12 @@
 import './button.scss';
 import { useformContext } from '~/store/FormContext';
 
-const ForgotButton = () => {
+const ForgotButton = ({ id }) => {
   const { handleStep } = useformContext();
 
   return (
     <div className={'d-flex forgotButton justify-content-center align-items-center'}>
-      <button onClick={() => handleStep(2)}>
+      <button onClick={() => (id !== 2 ? handleStep(2) : handleStep(0))}>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           width='14'
@@ -27,7 +27,9 @@ const ForgotButton = () => {
           </defs>
         </svg>
         &nbsp;
-        <span>Esqueceu a senha?</span>
+        <span>
+          {id === 2 ? 'Não possui conta?' : id === 3 ? 'Já possui conta?' : 'Esqueceu a senha?'}
+        </span>
       </button>
     </div>
   );

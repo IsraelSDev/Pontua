@@ -10,6 +10,7 @@ import { useformContext } from '~/store/FormContext';
 import ResetPasswordForm from '~/components/Forms/ResetPasswordForm';
 import SucessFull from '~/components/Forms/SucessFull';
 import HeroSelectForm from '~/components/Forms/HeroSelectForm';
+import CadForm from '~/components/Forms/CadForm';
 
 const Login = () => {
   const { step, handleStep } = useformContext();
@@ -37,9 +38,13 @@ const Login = () => {
                 <img alt={''} src={build} />
               </div>
             </div>
-            <div className={'col-4 d-flex align-items-end justify-content-center card-container '}>
-              <div className={`box-two  card`}>
-                {step === 1 ? (
+            <div className={'col-4 d-flex align-items-end justify-content-center card-container'}>
+              <div className={`box-two`}>
+                {step === 0 ? (
+                  <div className='front'>
+                    <CadForm />
+                  </div>
+                ) : step === 1 ? (
                   <div className='front'>
                     <LoginForm />
                   </div>
