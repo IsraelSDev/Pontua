@@ -2,8 +2,8 @@ import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import SvgIcon from '@mui/material/SvgIcon';
-import Loading from '~/components/Loading/Loading';
 import React from 'react';
+import ButtonCustom from '~/components/Button/Button';
 
 const SucessFull = () => {
   return (
@@ -42,7 +42,7 @@ const SucessFull = () => {
         </FormControl>
         <div className={'row'}>
           <div className={'col-12'}>
-            <Loading id={3} />
+            <ButtonCustom title={'voltar para o login'} />
           </div>
         </div>
       </div>

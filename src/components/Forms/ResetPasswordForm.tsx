@@ -3,7 +3,8 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import SvgIcon from '@mui/material/SvgIcon';
 import React from 'react';
-import Loading from '~/components/Loading/Loading';
+
+import ButtonCustom from '~/components/Button/Button';
 
 const ResetPasswordForm = () => {
   return (
@@ -44,7 +45,7 @@ const ResetPasswordForm = () => {
         </FormControl>
         <div className={'row'}>
           <div className={'col-12'}>
-            <Loading id={2} />
+            <ButtonCustom title={'enviar link'} />
           </div>
         </div>
       </div>

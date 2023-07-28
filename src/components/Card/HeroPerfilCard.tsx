@@ -7,8 +7,6 @@ const HeroPerfilCard = () => {
 
   const imageUrl = `${hero.thumbnail.path}/portrait_xlarge.${hero.thumbnail.extension}`;
 
-  console.log(hero);
-
   return (
     <div className={'cardPerfilHero d-flex'}>
       <div>

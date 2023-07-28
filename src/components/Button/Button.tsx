@@ -2,18 +2,20 @@ import React from 'react';
 import './button.scss';
 
 const ButtonCustom = ({ title, id }) => {
+  console.log(id);
+
   return (
     <>
       <button
-        className={`${
-          id == 2 && id == 3 && id == 4 ? 'btn-large' : ''
-        } enviar d-flex justify-content-start align-items-center w-100`}
+        className={`enviar d-flex justify-content-center align-items-center ${
+          id === 2 ? 'w-50' : ''
+        }`}
         placeholder={'entrar'}
       >
-        <span>{title}</span>
-        {id !== 2 && id !== 3 && id !== 4 ? (
+        <h5>{title}</h5>
+        {id == 1 ? (
           <>
-            &nbsp;
+            &nbsp; &nbsp;
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='14'

@@ -1,6 +1,7 @@
 import Loading from '~/components/Loading/Loading';
 import React from 'react';
 import ButtonCustom from '~/components/Button/Button';
+import SelectCustom from '~/components/Select/Select';
 
 const HeroSelectForm = () => {
   return (
@@ -14,12 +15,12 @@ const HeroSelectForm = () => {
       <div>
         <div className={'row'}>
           <div className={'col-12'}>
-            <Loading id={4} />
+            <SelectCustom />
           </div>
         </div>
       </div>
       <div className={'d-flex mt-2 justify-content-end'}>
-        <ButtonCustom id={4} title={'entrar'} />
+        <ButtonCustom id={2} title={'entrar'} />
       </div>
     </form>
   );
