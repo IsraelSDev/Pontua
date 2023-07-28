@@ -12,8 +12,12 @@ import GridCustom from '~/components/Grid/Grid';
 import Circular from '~/components/Loading/Circular';
 
 import { getMarvelCharacters, getMarvelCharactersNavigate } from '~/services/marvelAPI';
+import { usePageContext } from "~/store/PageContext";
 
 const HeroSelector = () => {
+
+  const {hero} = usePageContext()
+
   const [page, setPage] = useState(1);
 
   const handlePagination = (index, page) => setPage(page);
@@ -35,7 +39,7 @@ const HeroSelector = () => {
         handleLoading(false);
       }
     };
-    // fetchMarvelCharacters();
+    fetchMarvelCharacters();
   }, []);
   useEffect(() => {
     handleLoading(true);
@@ -51,13 +55,13 @@ const HeroSelector = () => {
         handleLoading(false);
       }
     };
-    // fetchMarvelCharacters();
+    fetchMarvelCharacters();
   }, [page]);
 
   return (
     <div className={'heroContainer  flex-column  '}>
       <SearchBar />
-      <button onClick={() => console.log(heroList)}>debug</button>
+      <button onClick={() => console.log(hero)}>debug</button>
       {loading ? <Circular /> : <GridCustom data={heroList} />}
       <div className={'m-5 d-flex align-items-center justify-content-center'}>
         <Stack spacing={2}>

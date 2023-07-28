@@ -6,6 +6,10 @@
   box-shadow: 6px 0px 18px 0px rgba(0, 0, 0, 0.06);
   height: 100vh;
 
+  svg {
+    color: red
+  }
+
   a {
     text-decoration: none;
     margin: 0;
@@ -35,5 +39,9 @@
 
   .col-end {
     padding: 28px 25px;
+  }
+
+  .active {
+    color: var(--orange-500);
   }
 }
