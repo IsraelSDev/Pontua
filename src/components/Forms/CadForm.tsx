@@ -13,8 +13,6 @@ import ButtonCustom from '~/components/Button/Button';
 import { signUp } from '~/services/authUsuario';
 import Circular from '~/components/Loading/Circular';
 import { useUserContext } from '~/store/UserContext';
-import { useNavigate } from 'react-router';
-import { usePageContext } from '~/store/PageContext';
 import { useformContext } from '~/store/FormContext';
 
 const CadForm = () => {
@@ -29,7 +27,6 @@ const CadForm = () => {
 
   const { updateUser } = useUserContext();
   const { handleStep } = useformContext();
-  const navigate = useNavigate();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -69,7 +66,6 @@ const CadForm = () => {
           anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
         });
         setTimeout(() => handleStep(4), 2000);
-
         setLoading(false);
       })
       .catch((error) => {
