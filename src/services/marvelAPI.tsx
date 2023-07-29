@@ -1,5 +1,5 @@
-import md5 from 'md5';
-import React from 'react';
+import md5 from "md5";
+import React from "react";
 
 const publicKey = import.meta.env.VITE_API_PUBLIC_KEY;
 const privateKey = import.meta.env.VITE_API_PRIVATE_KEY;
@@ -15,7 +15,7 @@ const getMarvelCharacters = async () => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Erro na chamada da API da Marvel:', error);
+    console.error("Erro na chamada da API da Marvel:", error);
     throw error;
   }
 };
@@ -28,9 +28,26 @@ const getMarvelCharactersNavigate = async (page: number) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Erro na chamada da API da Marvel:', error);
+    console.error("Erro na chamada da API da Marvel:", error);
     throw error;
   }
 };
 
-export { getMarvelCharacters, getMarvelCharactersNavigate };
+
+const getByName = async (name: string) => {
+  let url = "";
+  name.length > 0 ?
+    url = `${apiUrl}?nameStartsWith=${name}&limit=10&apikey=${publicKey}&ts=${timestamp}&hash=${hash}`
+    : url = `${apiUrl}?limit=10&apikey=${publicKey}&ts=${timestamp}&hash=${hash}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Erro na chamada da API da Marvel:", error);
+    throw error;
+  }
+};
+
+export { getMarvelCharacters, getMarvelCharactersNavigate, getByName };
