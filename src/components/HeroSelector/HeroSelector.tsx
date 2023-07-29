@@ -60,7 +60,6 @@ const HeroSelector = () => {
   return (
     <div className={'heroContainer  flex-column  '}>
       <SearchBar />
-      <button onClick={() => console.log(hero)}>debug</button>
       {loading ? <Circular /> : <GridCustom data={heroList} />}
       <div className={'m-5 d-flex align-items-center justify-content-center'}>
         <Stack spacing={2}>

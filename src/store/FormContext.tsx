@@ -8,7 +8,7 @@ export function FormContextProvider({ children }) {
     step: 1,
     handleStep: (playload) => {
       setData((prevState) => ({ ...prevState, step: playload }));
-    }
+    },
   });
 
   return <formContext.Provider value={data}>{children}</formContext.Provider>;

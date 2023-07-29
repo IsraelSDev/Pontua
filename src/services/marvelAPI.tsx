@@ -9,7 +9,7 @@ const timestamp = new Date().getTime();
 const hash = md5(timestamp + privateKey + publicKey);
 
 const getMarvelCharacters = async () => {
-  const url = `${apiUrl}?limit=10&&apikey=${publicKey}&ts=${timestamp}&hash=${hash}`;
+  const url = `${apiUrl}?limit=10&apikey=${publicKey}&ts=${timestamp}&hash=${hash}`;
   try {
     const response = await fetch(url);
     const data = await response.json();
