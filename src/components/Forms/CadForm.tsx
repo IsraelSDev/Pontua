@@ -5,32 +5,103 @@ import SvgIcon from '@mui/material/SvgIcon';
 import IconButton from '@mui/material/IconButton';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Visibility from '@mui/icons-material/Visibility';
-import React from 'react';
+import React, { useState } from 'react';
 import ForgotButton from '~/components/Button/ForgotButton';
+import { useSnackbar } from 'notistack';
 import './stylesForm.scss';
 import ButtonCustom from '~/components/Button/Button';
+import { signUp } from '~/services/authUsuario';
+import Circular from '~/components/Loading/Circular';
+import { useUserContext } from '~/store/UserContext';
+import { useNavigate } from 'react-router';
+import { usePageContext } from '~/store/PageContext';
+import { useformContext } from '~/store/FormContext';
 
 const CadForm = () => {
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = React.useState(false);
+  const [hasError, setError] = useState(false);
+  const [hasErrorPass, setErrorPass] = useState(false);
+  const [disable, setDisable] = useState(true);
+  const { enqueueSnackbar } = useSnackbar();
+
+  const { updateUser } = useUserContext();
+  const { handleStep } = useformContext();
+  const navigate = useNavigate();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
+
+  const validEmail = (data, id) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (data.length > 0) {
+      if (id == 1) {
+        setError(emailRegex.test(data));
+        setEmail(data);
+      } else if (id == 2) {
+        data.length >= 5 ? setErrorPass(true) : setErrorPass(false);
+        setPassword(data);
+      }
+      let countCertos = hasError + hasErrorPass;
+
+      if (countCertos === 2) {
+        setDisable(false);
+      } else {
+        setDisable(true);
+      }
+    }
+  };
+
+  const handleSubmit = (e) => {
+    setLoading(true);
+    e.preventDefault();
+
+    signUp(email, password)
+      .then((res) => {
+        console.log(res);
+        updateUser(res.user);
+        enqueueSnackbar('Usuário criado com sucesso! Redirecionando...', {
+          autoHideDuration: 2000,
+          anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+        });
+        setTimeout(() => handleStep(4), 2000);
+
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        error.toString().includes('auth/email-already-in-use')
+          ? enqueueSnackbar('E-mail já cadastrado!', {
+              autoHideDuration: 4000,
+              anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+            })
+          : enqueueSnackbar(error, {
+              autoHideDuration: 4000,
+              anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+            });
+        setLoading(false);
+      });
+  };
+
   return (
-    <form>
+    <form className={'registForm'} onSubmit={(e) => handleSubmit(e)}>
       <div>
         <h1>
           Registre-se <span>.</span>
         </h1>
         <p>Crie um login e senha para aproveitar nosso app.</p>
       </div>
-      <div>
+      <div className={hasError && hasErrorPass ? 'field' : ''}>
         <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
           <OutlinedInput
             id='outlined-size-small'
             placeholder='Registre seu e-mail'
+            onChange={(e) => validEmail(e.target.value, 1)}
+            error={!hasError}
             endAdornment={
               <InputAdornment position='end'>
                 <SvgIcon>
@@ -50,11 +121,14 @@ const CadForm = () => {
               </InputAdornment>
             }
           />
+          {!hasError ? <span>E-mail incompleto ou inválido</span> : null}
         </FormControl>
         <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
           <OutlinedInput
+            error={!hasErrorPass}
             placeholder='Registre sua senha'
             id='outlined-adornment-password'
+            onChange={(e) => validEmail(e.target.value, 2)}
             type={showPassword ? 'text' : 'password'}
             endAdornment={
               <InputAdornment position='end'>
@@ -73,10 +147,15 @@ const CadForm = () => {
               </InputAdornment>
             }
           />
+          {!hasErrorPass ? <span>Senha deve ter mais de 5 caracteres</span> : null}
         </FormControl>
         <div className={'row'}>
           <div className={'col-12'}>
-            <ButtonCustom id={1} title={'entrar'} />
+            {loading ? (
+              <Circular noMargin />
+            ) : (
+              <ButtonCustom disabled={disable} id={2} title={'cadastrar'} />
+            )}
           </div>
         </div>
       </div>

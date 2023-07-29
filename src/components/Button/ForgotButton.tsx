@@ -6,7 +6,7 @@ const ForgotButton = ({ id }) => {
 
   return (
     <div className={'d-flex forgotButton justify-content-center align-items-center'}>
-      <button onClick={() => (id !== 2 ? handleStep(2) : handleStep(0))}>
+      <button onClick={() => (id == 2 ? handleStep(0) : id == 3 ? handleStep(1) : handleStep(2))}>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           width='14'
