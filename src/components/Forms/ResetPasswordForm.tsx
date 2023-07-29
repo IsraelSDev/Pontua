@@ -2,13 +2,49 @@ import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import SvgIcon from '@mui/material/SvgIcon';
-import React from 'react';
+import React, { useState } from 'react';
 
 import ButtonCustom from '~/components/Button/Button';
+import Circular from '~/components/Loading/Circular';
+import { resetPassword } from '~/services/authUsuario';
+import { useSnackbar } from 'notistack';
+import { useformContext } from '~/store/FormContext';
 
 const ResetPasswordForm = () => {
+  const { enqueueSnackbar } = useSnackbar();
+  const { handleStep } = useformContext();
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState('');
+
+  const handleResetPassword = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    console.log(email);
+
+    resetPassword(email)
+      .then(() => {
+        handleStep(3);
+      })
+      .catch((error) => {
+        let errorMessage = error.toString();
+        console.log(error);
+        errorMessage.includes('auth/invalid-email')
+          ? enqueueSnackbar('Email inválido.', {
+              autoHideDuration: 2000,
+              anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+            })
+          : errorMessage.includes('auth/user-not-found')
+          ? enqueueSnackbar('Usuário não encontrado.', {
+              autoHideDuration: 2000,
+              anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+            })
+          : null;
+      })
+      .finally(() => setLoading(false));
+  };
+
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form onSubmit={(e) => handleResetPassword(e)}>
       <div>
         <h1>
           Recuperar senha <span>.</span>
@@ -21,6 +57,7 @@ const ResetPasswordForm = () => {
       <div>
         <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
           <OutlinedInput
+            onChange={(e) => setEmail(e.target.value)}
             id='outlined-size-small'
             placeholder='Informe seu e-mail'
             endAdornment={
@@ -45,7 +82,7 @@ const ResetPasswordForm = () => {
         </FormControl>
         <div className={'row'}>
           <div className={'col-12'}>
-            <ButtonCustom title={'enviar link'} />
+            {loading ? <Circular noMargin /> : <ButtonCustom title={'enviar link'} />}
           </div>
         </div>
       </div>

@@ -5,21 +5,77 @@ import SvgIcon from '@mui/material/SvgIcon';
 import IconButton from '@mui/material/IconButton';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Visibility from '@mui/icons-material/Visibility';
-import React from 'react';
+import React, { useState } from 'react';
 import ForgotButton from '~/components/Button/ForgotButton';
 import './stylesForm.scss';
 import ButtonCustom from '~/components/Button/Button';
+import Circular from '~/components/Loading/Circular';
+import { login } from '~/services/authUsuario';
+import { useSnackbar } from 'notistack';
+import { useformContext } from '~/store/FormContext';
 
 const LoginForm = () => {
+  const { handleStep } = useformContext();
   const [showPassword, setShowPassword] = React.useState(false);
 
+  const { enqueueSnackbar } = useSnackbar();
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    console.log(email, password);
+
+    login(email, password)
+      .then((res) => {
+        if (res) {
+          enqueueSnackbar('Usuário autenticado com sucesso! Redirecionando...', {
+            autoHideDuration: 2000,
+            anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+          });
+          setTimeout(() => handleStep(4), 2000);
+        }
+      })
+      .catch((error) => {
+        let errorMessage = error.toString();
+        errorMessage.includes('auth/wrong-password')
+          ? enqueueSnackbar('Senha incorreta.', {
+              autoHideDuration: 2000,
+              anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+            })
+          : errorMessage.includes('auth/user-not-found')
+          ? enqueueSnackbar('Usuário não encontrado.', {
+              autoHideDuration: 2000,
+              anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+            })
+          : errorMessage.includes('auth/invalid-email')
+          ? enqueueSnackbar('E-mail inválido.', {
+              autoHideDuration: 2000,
+              anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+            })
+          : errorMessage.includes('auth/too-many-requests')
+          ? enqueueSnackbar('Acesso bloqueado pelo excesso de tentativas.', {
+              autoHideDuration: 2000,
+              anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+            })
+          : null;
+        console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   return (
-    <form>
+    <form onSubmit={(e) => handleLogin(e)}>
       <div>
         <h1>
           Bem-vindo <span>.</span>
@@ -31,6 +87,7 @@ const LoginForm = () => {
           <OutlinedInput
             id='outlined-size-small'
             placeholder='Informe seu e-mail'
+            onChange={(e) => setEmail(e.target.value)}
             endAdornment={
               <InputAdornment position='end'>
                 <SvgIcon>
@@ -55,6 +112,7 @@ const LoginForm = () => {
           <OutlinedInput
             placeholder='Informe sua senha'
             id='outlined-adornment-password'
+            onChange={(e) => setPassword(e.target.value)}
             type={showPassword ? 'text' : 'password'}
             endAdornment={
               <InputAdornment position='end'>
@@ -76,7 +134,7 @@ const LoginForm = () => {
         </FormControl>
         <div className={'row'}>
           <div className={'col-12'}>
-            <ButtonCustom id={1} title={'entrar'} />
+            {loading ? <Circular noMargin /> : <ButtonCustom id={1} title={'entrar'} />}
           </div>
         </div>
       </div>
