@@ -1,3 +1,20 @@
 a {
   text-decoration: none;
 }
+
+.field {
+  input[type='text']::placeholder, input[type='password']::placeholder {
+    color: red;
+  }
+}
+
+.registForm {
+  span {
+    font-size: 12px;
+    color: red;
+
+    &:last-of-type {
+      color: #081B4E;
+    }
+  }
+}

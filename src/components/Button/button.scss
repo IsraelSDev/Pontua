@@ -16,6 +16,10 @@
     line-height: normal;
     letter-spacing: -1.56px;
   }
+
+  &:disabled {
+    background: #9396a4;
+  }
 }
 
 .forgotButton {

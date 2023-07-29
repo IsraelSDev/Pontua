@@ -1,9 +1,7 @@
 import React from 'react';
 import './button.scss';
 
-const ButtonCustom = ({ title, id }) => {
-  console.log(id);
-
+const ButtonCustom = ({ title, id, disabled }) => {
   return (
     <>
       <button
@@ -11,6 +9,7 @@ const ButtonCustom = ({ title, id }) => {
           id === 2 ? 'w-50' : ''
         }`}
         placeholder={'entrar'}
+        disabled={disabled}
       >
         <h5>{title}</h5>
         {id == 1 ? (
