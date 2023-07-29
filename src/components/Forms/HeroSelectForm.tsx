@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import ButtonCustom from '~/components/Button/Button';
-import SelectCustom from '~/components/Select/Select';
-import { useformContext } from '~/store/FormContext';
-import { getMarvelCharacters } from '~/services/marvelAPI';
-import { useNavigate } from 'react-router-dom';
-import { usePageContext } from '~/store/PageContext';
+import React, { useEffect, useState } from "react";
+import ButtonCustom from "~/components/Button/Button";
+import SelectCustom from "~/components/Select/Select";
+import { useformContext } from "~/store/FormContext";
+import { getMarvelCharacters } from "~/services/marvelAPI";
+import { useNavigate } from "react-router-dom";
+import { usePageContext } from "~/store/PageContext";
 
 const HeroSelectForm = () => {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const HeroSelectForm = () => {
   const checkSelect = (e) => {
     e.preventDefault();
     console.log(hero);
-    navigate('/dashboard/perfil/' + hero.id);
+    navigate("/dashboard/perfil/" + hero.id);
   };
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const HeroSelectForm = () => {
   }, []);
 
   return (
-    <form onSubmit={(e) => checkSelect(e)}>
+    <form onSubmit={(e) => checkSelect(e)} style={{ height: "349px" }}>
       <div>
         <h1>
           Selecione o seu agente mais legal <span>.</span>
@@ -45,15 +45,15 @@ const HeroSelectForm = () => {
         <p>Tenha a visão completa do seu agente.</p>
       </div>
       <div>
-        <div className={'row'}>
-          <div className={'col-12'}>
+        <div className={"row"}>
+          <div className={"col-12"}>
             <SelectCustom data={agents.length > 0 ? agents : null} />
           </div>
         </div>
       </div>
 
-      <div className={'d-flex mt-2 justify-content-end'}>
-        <ButtonCustom disabled={disable} id={2} title={'entrar'} />
+      <div className={"d-flex mt-2 justify-content-end"}>
+        <ButtonCustom disabled={disable} id={2} title={"entrar"} />
       </div>
     </form>
   );

@@ -78,7 +78,7 @@ const LoginForm = () => {
     <form onSubmit={(e) => handleLogin(e)}>
       <div>
         <h1>
-          Bem-vindo <span>.</span>
+          Bem-vindo<span>.</span>
         </h1>
         <p>informe as suas credenciais de acesso ao portal</p>
       </div>
