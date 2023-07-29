@@ -7,6 +7,7 @@ export function FormContextProvider({ children }) {
   const [data, setData] = useState({
     step: 1,
     handleStep: (playload) => {
+
       setData((prevState) => ({ ...prevState, step: playload }));
     },
   });
