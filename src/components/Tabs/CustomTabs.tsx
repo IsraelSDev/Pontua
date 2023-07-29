@@ -44,6 +44,8 @@ function a11yProps(index: number) {
 export default function BasicTabs() {
   const { hero } = usePageContext();
 
+  console.log(hero);
+
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -65,7 +67,7 @@ export default function BasicTabs() {
         <HeroPerfilCard />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <GenericListCard list={hero.series.items ? hero.series.items : null} />
+        <GenericListCard list={hero ? hero.series.items : null} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
         <GenericListCard list={hero ? hero.stories.items : null} />

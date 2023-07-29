@@ -7,9 +7,17 @@ import iconSair from '~/assets/icons/corner-up-left.svg';
 import './sidebar.scss';
 import { Link } from 'react-router-dom';
 import { usePageContext } from '~/store/PageContext';
+import { useformContext } from '~/store/FormContext';
+import { signOutApp } from '~/services/authUsuario';
 
 const Sidebar = () => {
   const { currentPage, handleCurrentPage } = usePageContext();
+  const { handleStep } = useformContext();
+
+  const logOut = () => {
+    handleStep(1);
+    signOutApp();
+  };
 
   return (
     <>
@@ -36,7 +44,7 @@ const Sidebar = () => {
           </Link>
         </div>
         <div className={'row'}>
-          <Link to={'/login'}>
+          <Link to={'/login'} onClick={logOut}>
             <div className={'col-12 d-flex line-end  col-end'}>
               <img src={iconSair} /> <p>Sair</p>
             </div>

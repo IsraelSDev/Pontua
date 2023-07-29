@@ -3,15 +3,20 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import './select.scss';
+import Circular from '~/components/Loading/Circular';
 
-export default function SelectCustom() {
+import { usePageContext } from '~/store/PageContext';
+
+export default function SelectCustom({ data }) {
   const [age, setAge] = React.useState('');
+
+  const { selectHero } = usePageContext();
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
+    selectHero(event.target.value);
   };
-
-  return (
+  return data?.length > 1 ? (
     <div>
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <Select
@@ -20,7 +25,7 @@ export default function SelectCustom() {
           displayEmpty
           inputProps={{ 'aria-label': 'Without label' }}
         >
-          <MenuItem value=''>
+          <MenuItem value='' disabled>
             <em>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -40,11 +45,36 @@ export default function SelectCustom() {
               &nbsp; Selecione um agente &nbsp;
             </em>
           </MenuItem>
-          <MenuItem value={10}>One </MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {data.map((agent) => (
+            <MenuItem key={agent.id} value={agent}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  padding: '0 15px',
+                }}
+              >
+                <img
+                  className={'img-select'}
+                  src={`${agent.thumbnail.path}/portrait_xlarge.${agent.thumbnail.extension}`}
+                  alt=''
+                  style={{
+                    width: '24px',
+                    margin: '0',
+                    height: '24px',
+                    borderRadius: '50%',
+                    marginRight: '20px',
+                  }}
+                />
+
+                {agent.name}
+              </div>
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </div>
+  ) : (
+    <Circular noMargin />
   );
 }
