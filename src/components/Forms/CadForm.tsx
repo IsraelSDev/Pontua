@@ -43,7 +43,7 @@ const CadForm = () => {
         data.length >= 5 ? setErrorPass(true) : setErrorPass(false);
         setPassword(data);
       }
-      let countCertos = hasError + hasErrorPass;
+      const countCertos = hasError + hasErrorPass;
 
       if (countCertos === 2) {
         setDisable(false);

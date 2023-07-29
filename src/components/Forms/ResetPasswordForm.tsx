@@ -26,7 +26,7 @@ const ResetPasswordForm = () => {
         handleStep(3);
       })
       .catch((error) => {
-        let errorMessage = error.toString();
+        const errorMessage = error.toString();
         console.log(error);
         errorMessage.includes('auth/invalid-email')
           ? enqueueSnackbar('Email inválido.', {

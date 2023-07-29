@@ -45,7 +45,7 @@ const LoginForm = () => {
         }
       })
       .catch((error) => {
-        let errorMessage = error.toString();
+        const errorMessage = error.toString();
         errorMessage.includes('auth/wrong-password')
           ? enqueueSnackbar('Senha incorreta.', {
               autoHideDuration: 2000,
